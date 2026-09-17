@@ -2,25 +2,25 @@ from patient import Patient
 
 import matplotlib.pyplot as plt
 import statistics
-
+# Load patient data from the CSV file
 Patient.instantiate_from_csv("Metadata and Protein Data for Module 1.csv")
-
+# Print the number of patients and one example patient
 print(len(Patient.all_patients))
 print(Patient.all_patients[0])
-
+# Sort and print patients by age at death
 sorted_patients = sorted(
     Patient.all_patients,
     key=lambda patient: patient.age_at_death
 )
 for patient in sorted_patients:
     print(patient)
-female_dementia = Patient.filter("Female", "Dementia")
+female_dementia = Patient.filter("Female", "Dementia")# Filter female patients with dementia
 
 for patient in female_dementia:
     print(patient)
 
 print("Number of female patients with dementia:", len(female_dementia))
-male_dementia = Patient.filter("Male", "Dementia")
+male_dementia = Patient.filter("Male", "Dementia")# Calculate mean and standard deviation of pTAU by sex
 female_ptau = [patient.ptau for patient in female_dementia]
 male_ptau = [patient.ptau for patient in male_dementia]
 female_mean = statistics.mean(female_ptau)
