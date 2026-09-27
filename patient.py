@@ -36,11 +36,15 @@ class Patient:
                     ptau=float(row["pTAU pg/ug"])
                 )
     @classmethod
-    def filter(cls, sex, cognitive_status):
+    def filter(cls, sex="any", cognitive_status="any"):
         filtered_patients = []
 
         for patient in cls.all_patients:
-            if patient.sex == sex and patient.cognitive_status == cognitive_status:
+            sex_matches = sex == "any" or patient.sex == sex
+            cognitive_status_matches = cognitive_status == "any" or patient.cognitive_status == cognitive_status
+
+            if sex_matches and cognitive_status_matches:
                 filtered_patients.append(patient)
 
         return filtered_patients
+    
